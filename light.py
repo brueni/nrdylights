@@ -24,8 +24,18 @@ ch5r = 13
 ch5g = 12
 ch5b = 14
 
+#Arg1 - Static or Dynamic
+scenetype = sys.argv[1]
+
+#Arg2 - Scenefile
+scenefile = sys.argv[2]
+
+#Path to Scenefile
+scenepath = 'scenes-' + scenetype + '/' + scenefile + '.scn'
+print scenepath
+
 #read Scene-File into array
-array = open('scenes-static/test.scn').read().split('\n')
+array = open(scenepath).read().split('\n')
 
 #put array-values into vars
 val1r = int(array[0])
@@ -62,7 +72,9 @@ pwm.setPWM(ch5g, 0, val5g)
 pwm.setPWM(ch5b, 0, val5b)
 
 
-time.sleep(3)
+#time.sleep(3)
+
+raw_input("wait")
 
 i = 0
 while i <= 14:
