@@ -1,3 +1,5 @@
 Adafruit*
 example.py
 state/
+state-bak/
+*.state
