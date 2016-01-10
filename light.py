@@ -78,79 +78,54 @@ def fadefromto( channel, from_red, from_green, from_blue, to_red, to_green, to_b
 		time.sleep(delay)
 
 def fadetoscene( scene, steps, delay ):
-        ch = 1
-        colorch = 1
-	while ch <= 5:
-		str_ch = str(ch)
-        	str_colorch = str(colorch)
-        	fromvar  = 'from' + str_ch + str_colorch
-        	tovar = 'val' + str_ch + str_colorch
-	#	stepsize = float(eval(tovar) - eval(fromvar))/steps  
-		if colorch != 3:
-                	colorch = colorch + 1
-       		else:
-                	ch = ch + 1
-                	colorch = 1
-	stepsize11 = float(val11 - from11)/steps
-	stepsize12 = float(val12 - from12)/steps
-	stepsize13 = float(val13 - from13)/steps
-	stepsize21 = float(val21 - from21)/steps
-	stepsize22 = float(val22 - from22)/steps
-	stepsize23 = float(val23 - from23)/steps
-	stepsize31 = float(val31 - from31)/steps
-	stepsize32 = float(val32 - from32)/steps
-	stepsize33 = float(val33 - from33)/steps
-	stepsize41 = float(val41 - from41)/steps
-	stepsize42 = float(val42 - from42)/steps
-	stepsize43 = float(val43 - from43)/steps
-	stepsize51 = float(val51 - from51)/steps
-	stepsize52 = float(val52 - from52)/steps
-	stepsize53 = float(val53 - from53)/steps
-	for step in range(0, steps+1):
-		setval11 = int(eval(fromvar) + stepsize11*step)
-		setval12 = int(eval(fromvar) + stepsize12*step)
-		setval13 = int(eval(fromvar) + stepsize13*step)
-		setval21 = int(eval(fromvar) + stepsize21*step)
-		setval22 = int(eval(fromvar) + stepsize22*step)
-		setval23 = int(eval(fromvar) + stepsize23*step)
-		setval31 = int(eval(fromvar) + stepsize31*step)
-		setval32 = int(eval(fromvar) + stepsize32*step)
-		setval33 = int(eval(fromvar) + stepsize33*step)
-		setval41 = int(eval(fromvar) + stepsize41*step)
-		setval42 = int(eval(fromvar) + stepsize42*step)
-		setval43 = int(eval(fromvar) + stepsize43*step)
-		setval51 = int(eval(fromvar) + stepsize51*step)
-		setval52 = int(eval(fromvar) + stepsize52*step)
-		setval53 = int(eval(fromvar) + stepsize53*step)
-		setchannel(ch11, setval11)
-		setchannel(ch12, setval12)
-		setchannel(ch13, setval13)
-		setchannel(ch21, setval21)
-		setchannel(ch22, setval22)
-		setchannel(ch23, setval23)
-		setchannel(ch31, setval31)
-		setchannel(ch32, setval32)
-		setchannel(ch33, setval33)
-		setchannel(ch41, setval41)
-		setchannel(ch42, setval42)
-		setchannel(ch43, setval43)
-		setchannel(ch51, setval51)
-		setchannel(ch52, setval52)
-		setchannel(ch53, setval53)
-		#ch = 1
-		#colorch = 1
-		#while ch <= 5:
-		#	str_ch = str(ch)
-                #	str_colorch = str(colorch)
-		#	currentchannel = eval('ch' + str_ch + str_colorch)
-		#	currentval = eval('setval' + str_ch + str_colorch)
-		#setchannel(currentchannel, currentval)
-		#	if colorch != 3:
-		#		colorch = colorch + 1
-		#	else:
-		#		ch = ch + 1
-		#		colorch = 1
-		time.sleep(delay)
+        ch11_step = float(val11 - from11)/steps
+        ch12_step = float(val12 - from12)/steps
+        ch13_step = float(val13 - from13)/steps
+        ch21_step = float(val21 - from21)/steps
+        ch22_step = float(val22 - from22)/steps
+        ch23_step = float(val23 - from23)/steps
+        ch31_step = float(val31 - from31)/steps
+        ch32_step = float(val32 - from32)/steps
+        ch33_step = float(val33 - from33)/steps
+        ch41_step = float(val41 - from41)/steps
+        ch42_step = float(val42 - from42)/steps
+        ch43_step = float(val43 - from43)/steps
+        ch51_step = float(val51 - from51)/steps
+        ch52_step = float(val52 - from52)/steps
+        ch53_step = float(val53 - from53)/steps
+        for step in range(0, steps+1):
+                ch11_nextval = int(from11 + ch11_step*step)
+                ch12_nextval = int(from12 + ch12_step*step)
+                ch13_nextval = int(from13 + ch13_step*step)
+                ch21_nextval = int(from21 + ch21_step*step)
+                ch22_nextval = int(from22 + ch22_step*step)
+                ch23_nextval = int(from23 + ch23_step*step)
+                ch31_nextval = int(from31 + ch31_step*step)
+                ch32_nextval = int(from32 + ch32_step*step)
+                ch33_nextval = int(from33 + ch33_step*step)
+                ch41_nextval = int(from41 + ch41_step*step)
+                ch42_nextval = int(from42 + ch42_step*step)
+                ch43_nextval = int(from43 + ch43_step*step)
+                ch51_nextval = int(from51 + ch51_step*step)
+                ch52_nextval = int(from52 + ch52_step*step)
+                ch53_nextval = int(from53 + ch53_step*step)
+                setchannel(ch11, ch11_nextval)
+                setchannel(ch12, ch12_nextval)
+                setchannel(ch13, ch13_nextval)
+                setchannel(ch21, ch21_nextval)
+                setchannel(ch22, ch22_nextval)
+                setchannel(ch23, ch23_nextval)
+                setchannel(ch31, ch31_nextval)
+                setchannel(ch32, ch32_nextval)
+                setchannel(ch33, ch33_nextval)
+                setchannel(ch41, ch41_nextval)
+                setchannel(ch42, ch42_nextval)
+                setchannel(ch43, ch43_nextval)
+                setchannel(ch51, ch51_nextval)
+                setchannel(ch52, ch52_nextval)
+                setchannel(ch53, ch53_nextval)
+                time.sleep(delay)
+
 
 #fadefromto( 3, 4000, 4000, 4000, 0, 0, 0, 20, 0.1 )
 
