@@ -5,7 +5,7 @@ import time, sys
 
 pwm = PWM(0x40)
 
-pwm.setPWMFreq(120)
+pwm.setPWMFreq(80)
 
 #define Channels, 1=red, 2=green, 3=blue, and so on
 ch11 = 1
@@ -166,7 +166,7 @@ val53 = int(array[14])
 #setchannel(ch52, val52)
 #setchannel(ch53, val53)
 
-fadetoscene( scenepath, 10, 0.2 )
+fadetoscene( scenepath, 30, 0.2 )
 
 #time.sleep(3)
 
