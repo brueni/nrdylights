@@ -24,31 +24,32 @@ ch51 = 13
 ch52 = 12
 ch53 = 14
 
-#Arg1 - Static or Dynamic
-scenetype = sys.argv[1]
-
-#Arg2 - Scenefile
-scenefile = sys.argv[2]
-
-#Path to Scenefile
-scenepath = 'scenes-' + scenetype + '/' + scenefile + '.scn'
+#Read Action-File
+def readaction():
+        actionfile = 'actions/next.action'
+        array = open(actionfile).read().split('\n')
+        action1 = str(array[0]) #Defines Type (static, dynamic)
+        action2 = str(array[1]) #Defines Scene
+	globals().update(locals())
 
 #Read statefiles
-from11 = int(open('state/1.state').read())
-from12 = int(open('state/2.state').read())
-from13 = int(open('state/0.state').read())
-from21 = int(open('state/4.state').read())
-from22 = int(open('state/3.state').read())
-from23 = int(open('state/8.state').read())
-from31 = int(open('state/5.state').read())
-from32 = int(open('state/7.state').read())
-from33 = int(open('state/6.state').read())
-from41 = int(open('state/10.state').read())
-from42 = int(open('state/11.state').read())
-from43 = int(open('state/9.state').read())
-from51 = int(open('state/13.state').read())
-from52 = int(open('state/12.state').read())
-from53 = int(open('state/14.state').read())
+def readcurrent():
+	from11 = int(open('state/1.state').read())
+	from12 = int(open('state/2.state').read())
+	from13 = int(open('state/0.state').read())
+	from21 = int(open('state/4.state').read())
+	from22 = int(open('state/3.state').read())
+	from23 = int(open('state/8.state').read())
+	from31 = int(open('state/5.state').read())
+	from32 = int(open('state/7.state').read())
+	from33 = int(open('state/6.state').read())
+	from41 = int(open('state/10.state').read())
+	from42 = int(open('state/11.state').read())
+	from43 = int(open('state/9.state').read())
+	from51 = int(open('state/13.state').read())
+	from52 = int(open('state/12.state').read())
+	from53 = int(open('state/14.state').read())
+	globals().update(locals())
 
 #Write Channel Function
 def setchannel( channel, value ):
@@ -58,6 +59,29 @@ def setchannel( channel, value ):
 	current_value = str(value)
 	filehandle.write(current_value)
 	filehandle.close()
+
+#Read Desired Scene
+def readscene():
+	scenetype = action1
+	scenefile = action2
+	scenepath = 'scenes-' + scenetype + '/' + scenefile + '.scn'
+	array = open(scenepath).read().split('\n')
+	val11 = int(array[0])
+	val12 = int(array[1])
+	val13 = int(array[2])
+	val21 = int(array[3])
+	val22 = int(array[4])
+	val23 = int(array[5])
+	val31 = int(array[6])
+	val32 = int(array[7])
+	val33 = int(array[8])
+	val41 = int(array[9])
+	val42 = int(array[10])
+	val43 = int(array[11])
+	val51 = int(array[12])
+	val52 = int(array[13])
+	val53 = int(array[14])
+	globals().update(locals())
 
 #Fade-Function
 def fadefromto( channel, from_red, from_green, from_blue, to_red, to_green, to_blue, steps, delay ):
@@ -126,47 +150,26 @@ def fadetoscene( scene, steps, delay ):
                 setchannel(ch53, ch53_nextval)
                 time.sleep(delay)
 
+#Read action-File every x seconds. If new action, execute.
+readaction()
+currentaction1 = ''
+currentaction2 = ''
+while action1 != 'exit':
+	readaction()
+        if action1 == 'exit':
+                print 'Found Exit-Action, all Lights off...'
+		readcurrent()
+                fadetoscene( 'scenes-static/all-off.scn', 5, 0.2)
+                break
+	if action1 != currentaction1 or action2 != currentaction2:
+		readcurrent()
+		readscene()
+		fadetoscene( scenepath, 30, 0.2 )
+	time.sleep(2)
+	currentaction1 = action1
+	currentaction2 = action2
+		
 
-#fadefromto( 3, 4000, 4000, 4000, 0, 0, 0, 20, 0.1 )
-
-#read Scene-File into array
-array = open(scenepath).read().split('\n')
-
-#put array-values into vars
-val11 = int(array[0])
-val12 = int(array[1])
-val13 = int(array[2])
-val21 = int(array[3])
-val22 = int(array[4])
-val23 = int(array[5])
-val31 = int(array[6])
-val32 = int(array[7])
-val33 = int(array[8])
-val41 = int(array[9])
-val42 = int(array[10])
-val43 = int(array[11])
-val51 = int(array[12])
-val52 = int(array[13])
-val53 = int(array[14])
-
-#set all channels to values
-#setchannel(ch11, val11)
-#setchannel(ch12, val12)
-#setchannel(ch13, val13)
-#setchannel(ch21, val21)
-#setchannel(ch22, val22)
-#setchannel(ch23, val23)
-#setchannel(ch31, val31)
-#setchannel(ch32, val32)
-#setchannel(ch33, val33)
-#setchannel(ch41, val41)
-#setchannel(ch42, val42)
-#setchannel(ch43, val43)
-#setchannel(ch51, val51)
-#setchannel(ch52, val52)
-#setchannel(ch53, val53)
-
-fadetoscene( scenepath, 30, 0.2 )
 
 #time.sleep(3)
 
