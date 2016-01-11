@@ -61,10 +61,13 @@ def setchannel( channel, value ):
 	filehandle.close()
 
 #Read Desired Scene
-def readscene():
-	scenetype = action1
-	scenefile = action2
-	scenepath = 'scenes-' + scenetype + '/' + scenefile + '.scn'
+def readscene( mode ):
+	if mode == 'file':
+		scenetype = action1
+		scenefile = action2
+		scenepath = 'scenes-' + scenetype + '/' + scenefile + '.scn'
+	elif mode == 'exit':
+		scenepath = 'scenes-static/all-off.scn'
 	array = open(scenepath).read().split('\n')
 	val11 = int(array[0])
 	val12 = int(array[1])
@@ -101,7 +104,7 @@ def fadefromto( channel, from_red, from_green, from_blue, to_red, to_green, to_b
         	setchannel(chblue, blue_value)
 		time.sleep(delay)
 
-def fadetoscene( scene, steps, delay ):
+def fadetoscene( steps, delay ):
         ch11_step = float(val11 - from11)/steps
         ch12_step = float(val12 - from12)/steps
         ch13_step = float(val13 - from13)/steps
@@ -159,12 +162,13 @@ while action1 != 'exit':
         if action1 == 'exit':
                 print 'Found Exit-Action, all Lights off...'
 		readcurrent()
-                fadetoscene( 'scenes-static/all-off.scn', 5, 0.2)
+		readscene( 'exit' )
+                fadetoscene( 5, 0.2)
                 break
 	if action1 != currentaction1 or action2 != currentaction2:
 		readcurrent()
-		readscene()
-		fadetoscene( scenepath, 30, 0.2 )
+		readscene( 'file' )
+		fadetoscene( 30, 0.2 )
 	time.sleep(2)
 	currentaction1 = action1
 	currentaction2 = action2
