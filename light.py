@@ -168,7 +168,7 @@ while action1 != 'exit':
 	if action1 != currentaction1 or action2 != currentaction2:
 		readcurrent()
 		readscene( 'file' )
-		fadetoscene( 30, 0.2 )
+		fadetoscene( 5, 0.2 )
 	time.sleep(2)
 	currentaction1 = action1
 	currentaction2 = action2
