@@ -71,21 +71,48 @@ def readscene( mode ):
 	elif mode == 'exit':
 		scenepath = 'scenes-static/all-off.scn'
 	array = open(scenepath).read().split('\n')
-	val11 = int(array[0])
-	val12 = int(array[1])
-	val13 = int(array[2])
-	val21 = int(array[3])
-	val22 = int(array[4])
-	val23 = int(array[5])
-	val31 = int(array[6])
-	val32 = int(array[7])
-	val33 = int(array[8])
-	val41 = int(array[9])
-	val42 = int(array[10])
-	val43 = int(array[11])
-	val51 = int(array[12])
-	val52 = int(array[13])
-	val53 = int(array[14])
+	if array[0] == 'color':
+		colorfile1 = 'color/' + array[1] + '.color'
+		colorfile2 = 'color/' + array[2] + '.color'
+		colorfile3 = 'color/' + array[3] + '.color'
+		colorfile4 = 'color/' + array[4] + '.color'
+		colorfile5 = 'color/' + array[5] + '.color'
+		colorarray1 = open(colorfile1).read().split('\n')
+		colorarray2 = open(colorfile2).read().split('\n')
+		colorarray3 = open(colorfile3).read().split('\n')
+		colorarray4 = open(colorfile4).read().split('\n')
+		colorarray5 = open(colorfile5).read().split('\n')
+		val11 = int(colorarray1[0])
+		val12 = int(colorarray1[1])
+		val13 = int(colorarray1[2])
+		val21 = int(colorarray2[0])
+		val22 = int(colorarray2[1])
+		val23 = int(colorarray2[2])
+		val31 = int(colorarray3[0])
+		val32 = int(colorarray3[1])
+		val33 = int(colorarray3[2])
+		val41 = int(colorarray4[0])
+		val42 = int(colorarray4[1])
+		val43 = int(colorarray4[2])
+		val51 = int(colorarray5[0])
+		val52 = int(colorarray5[1])
+		val53 = int(colorarray5[2])
+	else:
+		val11 = int(array[0])
+		val12 = int(array[1])
+		val13 = int(array[2])
+		val21 = int(array[3])
+		val22 = int(array[4])
+		val23 = int(array[5])
+		val31 = int(array[6])
+		val32 = int(array[7])
+		val33 = int(array[8])
+		val41 = int(array[9])
+		val42 = int(array[10])
+		val43 = int(array[11])
+		val51 = int(array[12])
+		val52 = int(array[13])
+		val53 = int(array[14])
 	globals().update(locals())
 
 #Fade-Function
