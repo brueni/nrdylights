@@ -52,11 +52,13 @@ def readcurrent():
 	globals().update(locals())
 
 #Write Channel Function
-def setchannel( channel, value ):
+def setchannel( channel, valuepercent ):
+	maxpercent = 4095
+	value = valuepercent * maxpercent / 100
 	pwm.setPWM(channel, 0, value)
 	statefile = 'state/' + str(channel) + '.state'
 	filehandle = open(statefile, "w")
-	current_value = str(value)
+	current_value = str(valuepercent)
 	filehandle.write(current_value)
 	filehandle.close()
 
