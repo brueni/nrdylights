@@ -1,7 +1,12 @@
 #!/usr/bin/python
 
 from Adafruit_PWM_Servo_Driver import PWM
-import time, sys
+import time, sys, subprocess
+
+#poweron external main switch
+poweron = "/var/mystrom-switch/switch.sh mystrom1.home on"
+process = subprocess.Popen(poweron.split(), stdout=subprocess.PIPE)
+time.sleep(1)
 
 pwm = PWM(0x40)
 
@@ -182,6 +187,12 @@ def fadetoscene( steps, delay ):
                 setchannel(ch53, ch53_nextval)
                 time.sleep(delay)
 
+#Define Poweroff of Mainswitch
+def mainpoweroff():
+	poweroff = "/var/mystrom-switch/switch.sh mystrom1.home off"
+	process = subprocess.Popen(poweroff.split(), stdout=subprocess.PIPE)
+
+
 #Read action-File every x seconds. If new action, execute.
 readaction()
 currentaction1 = ''
@@ -193,6 +204,7 @@ while action1 != 'exit':
 		readcurrent()
 		readscene( 'exit' )
                 fadetoscene( 5, 0.2)
+		mainpoweroff()
                 break
 	if action1 != currentaction1 or action2 != currentaction2:
 		readcurrent()
@@ -203,7 +215,7 @@ while action1 != 'exit':
 	currentaction2 = action2
 		
 
-
+mainpoweroff()
 #time.sleep(3)
 
 #raw_input("wait")
