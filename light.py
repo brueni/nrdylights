@@ -18,11 +18,11 @@ ch31 = 5
 ch32 = 7
 ch33 = 6
 ch41 = 10
-ch42 = 11
-ch43 = 9
+ch42 = 9
+ch43 = 11
 ch51 = 13
-ch52 = 12
-ch53 = 14
+ch52 = 14
+ch53 = 12
 
 #Read Action-File
 def readaction():
@@ -44,11 +44,11 @@ def readcurrent():
 	from32 = int(open('state/7.state').read())
 	from33 = int(open('state/6.state').read())
 	from41 = int(open('state/10.state').read())
-	from42 = int(open('state/11.state').read())
-	from43 = int(open('state/9.state').read())
+	from42 = int(open('state/9.state').read())
+	from43 = int(open('state/11.state').read())
 	from51 = int(open('state/13.state').read())
-	from52 = int(open('state/12.state').read())
-	from53 = int(open('state/14.state').read())
+	from52 = int(open('state/14.state').read())
+	from53 = int(open('state/12.state').read())
 	globals().update(locals())
 
 #Write Channel Function
