@@ -7,6 +7,16 @@ import time, sys, subprocess
 poweron = "/var/mystrom-switch/switch.sh mystrom1.home on"
 process = subprocess.Popen(poweron.split(), stdout=subprocess.PIPE)
 time.sleep(1)
+mainpowerstatefile = '/var/www/states/light_mystrom1.home.txt'
+mainpowerstate = open(mainpowerstatefile).read().split('\n')
+while mainpowerstate[0] != 'on':
+	time.sleep(1)
+	print "Main Power not on, waiting..."
+	powerstate = "/var/mystrom-switch/switch.sh mystrom1.home state"
+	process2 = subprocess.Popen(powerstate.split(), stdout=subprocess.PIPE)
+	mainpowerstate = open(mainpowerstatefile).read().split('\n')
+
+print "Main Power on, good to go"
 
 pwm = PWM(0x40)
 
