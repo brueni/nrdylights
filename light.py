@@ -228,6 +228,7 @@ while action1 != 'exit':
 	time.sleep(2)
 	currentaction1 = action1
 	currentaction2 = action2
+	currentaction3 = action3
 		
 
 mainpoweroff()
