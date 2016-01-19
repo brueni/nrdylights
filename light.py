@@ -79,11 +79,13 @@ def setchannel( channel, valuepercent ):
 	filehandle.close()
 
 #Read Desired Scene
-def readscene( mode ):
+def readscene( mode, scenedirect='none' ):
 	if mode == 'file':
 		scenetype = action1
 		scenefile = action2
 		scenepath = 'scenes-' + scenetype + '/' + scenefile + '.scn'
+	elif mode == 'arg':
+		scenepath = 'scenes-static/' + scenedirect + '.scn'
 	elif mode == 'exit':
 		scenepath = 'scenes-static/all-off.scn'
 	array = open(scenepath).read().split('\n')
@@ -133,6 +135,11 @@ def readscene( mode ):
 		val52 = int(float(array[13]) * float(brightarray[4]) / 100)
 		val53 = int(float(array[14]) * float(brightarray[4]) / 100)
 	globals().update(locals())
+
+#Read Dynamic Scene
+def readdynamic( dynscene ):
+
+
 
 #Fade-Function
 def fadefromto( channel, from_red, from_green, from_blue, to_red, to_green, to_blue, steps, delay ):
@@ -223,8 +230,11 @@ while action1 != 'exit':
                 break
 	if action1 != currentaction1 or action2 != currentaction2 or action3 != currentaction3:
 		readcurrent()
-		readscene( 'file' )
-		fadetoscene( 5, 0.2 )
+		if action1 == 'static':
+			readscene( 'file' )
+			fadetoscene( 5, 0.2 )
+		elif action1 == 'dynamic':
+			readdynamic( 'action2' )
 	time.sleep(2)
 	currentaction1 = action1
 	currentaction2 = action2
