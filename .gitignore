@@ -4,3 +4,4 @@ state/
 state-bak/
 *.state
 actions/next.action
+*.lock
