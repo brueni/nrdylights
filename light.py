@@ -1,7 +1,14 @@
 #!/usr/bin/python
 
 from Adafruit_PWM_Servo_Driver import PWM
-import time, sys, subprocess
+from subprocess import check_output
+import os, time, sys, subprocess
+
+if os.path.exists('light.lock'):
+	print "Process already running, exiting"
+	sys.exit()
+else:
+	open('light.lock', 'a').close()
 
 #poweron external main switch
 poweron = "/var/mystrom-switch/switch.sh mystrom1.home on"
@@ -137,7 +144,7 @@ def readscene( mode, scenedirect='none' ):
 	globals().update(locals())
 
 #Read Dynamic Scene
-def readdynamic( dynscene ):
+#def readdynamic( dynscene ):
 
 
 
@@ -227,6 +234,7 @@ while action1 != 'exit':
 		readscene( 'exit' )
                 fadetoscene( 5, 0.2)
 		mainpoweroff()
+		os.remove('light.lock')
                 break
 	if action1 != currentaction1 or action2 != currentaction2 or action3 != currentaction3:
 		readcurrent()
@@ -242,13 +250,4 @@ while action1 != 'exit':
 		
 
 mainpoweroff()
-#time.sleep(3)
-
-#raw_input("wait")
-
-#i = 0
-#while i <= 14:
-#	pwm.setPWM(i, 0, 0)
-#	i = i + 1
-
-#print sys.argv[1]
+os.remove('light.lock')
