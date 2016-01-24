@@ -4,6 +4,8 @@ from Adafruit_PWM_Servo_Driver import PWM
 from subprocess import check_output
 import os, time, sys, subprocess
 
+os.chdir(os.path.dirname(sys.argv[0]))
+
 if os.path.exists('light.lock'):
 	print "Process already running, exiting"
 	sys.exit()
@@ -233,8 +235,8 @@ while action1 != 'exit':
 		readcurrent()
 		readscene( 'exit' )
                 fadetoscene( 5, 0.2)
-		mainpoweroff()
-		os.remove('light.lock')
+		#mainpoweroff()
+		#os.remove('light.lock')
                 break
 	if action1 != currentaction1 or action2 != currentaction2 or action3 != currentaction3:
 		readcurrent()
