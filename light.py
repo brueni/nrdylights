@@ -149,18 +149,16 @@ def readscene( mode, scenedirect='none' ):
 def readdynamic( dynscene ):
 	dynscenepath = 'scenes-dynamic/' + dynscene + '.dyn'
 	dynarray = open(dynscenepath).read().split('\n')
-	dynsteps = dynarray[0]
-	#for dynstep in range (1, dynsteps):
-	readcurrent()
-	readscene( 'arg', dynarray[1] )
-	fadetoscene( int(dynarray[2]), float(dynarray[3]) )
-	time.sleep( float(dynarray[4]) )
-	readcurrent()
-	readscene( 'arg', dynarray[5] )
-	fadetoscene( int(dynarray[6]), float(dynarray[7]) )
-	time.sleep( float(dynarray[8]) )
-
-	
+	dynsteps = int(dynarray[0]) + 1
+	for dynstep in range (1, dynsteps):
+		fielda = dynstep * 4 - 3
+		fieldb = dynstep * 4 - 2
+		fieldc = dynstep * 4 - 1
+		fieldd = dynstep * 4
+		readcurrent()
+		readscene( 'arg', dynarray[fielda] )
+		fadetoscene( int(dynarray[fieldb]), float(dynarray[fieldc]) )
+		time.sleep( float(dynarray[fieldd]) )
 
 #Fade-Function
 def fadefromto( channel, from_red, from_green, from_blue, to_red, to_green, to_blue, steps, delay ):
