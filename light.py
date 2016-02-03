@@ -55,6 +55,7 @@ def readaction():
         action1 = str(array[0]) #Defines Type (static, dynamic)
         action2 = str(array[1]) #Defines Scene
 	action3 = str(array[2]) #Defines Brightness
+	action4 = str(array[3]) #Defines single or repeat
 	globals().update(locals())
 
 #Read statefiles
@@ -238,6 +239,7 @@ readaction()
 currentaction1 = ''
 currentaction2 = ''
 currentaction3 = ''
+currentaction4 = ''
 while action1 != 'exit':
 	readaction()
         if action1 == 'exit':
@@ -245,20 +247,21 @@ while action1 != 'exit':
 		readcurrent()
 		readscene( 'exit' )
                 fadetoscene( 5, 0.2)
-		#mainpoweroff()
-		#os.remove('light.lock')
                 break
-	if action1 != currentaction1 or action2 != currentaction2 or action3 != currentaction3:
+	if action1 != currentaction1 or action2 != currentaction2 or action3 != currentaction3 or action4 != currentaction4:
 		readcurrent()
 		if action1 == 'static':
 			readscene( 'file' )
 			fadetoscene( 5, 0.2 )
 		elif action1 == 'dynamic':
-			readdynamic( action2 )
+			while action4 == 'repeat':
+				readdynamic( action2 )
+				readaction()
 	time.sleep(2)
 	currentaction1 = action1
 	currentaction2 = action2
 	currentaction3 = action3
+	currentaction4 = action4
 		
 
 mainpoweroff()
