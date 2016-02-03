@@ -4,9 +4,10 @@ LED-Light Controller
 ### actions/next.action
 The script reads the next action from this file. Possible entries:
 ```
-Line1: static | exit
+Line1: static | dynamic | exit
 Line2: Name of the .scn Scenefile (file only, without folder)
 Line3: Name of the .bright File with the brightness-Definitions
+Line4: single | repeat
 ```
 
 ### scenes-static/foo.scene
