@@ -254,7 +254,11 @@ while action1 != 'exit':
 			readscene( 'file' )
 			fadetoscene( 5, 0.2 )
 		elif action1 == 'dynamic':
-			while action4 == 'repeat':
+			if action4 == 'repeat':
+				while action4 == 'repeat':
+					readdynamic( action2 )
+					readaction()
+			elif action4 == 'single':
 				readdynamic( action2 )
 				readaction()
 	time.sleep(2)
