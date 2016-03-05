@@ -246,13 +246,13 @@ while action1 != 'exit':
                 print 'Found Exit-Action, all Lights off...'
 		readcurrent()
 		readscene( 'exit' )
-                fadetoscene( 5, 0.2)
+                fadetoscene( 20, 0.2)
                 break
 	if action1 != currentaction1 or action2 != currentaction2 or action3 != currentaction3 or action4 != currentaction4:
 		readcurrent()
 		if action1 == 'static':
 			readscene( 'file' )
-			fadetoscene( 5, 0.2 )
+			fadetoscene( 20, 0.2 )
 		elif action1 == 'dynamic':
 			if action4 == 'repeat':
 				while action4 == 'repeat':
