@@ -13,14 +13,17 @@ else:
 	open('light.lock', 'a').close()
 
 #poweron external main switch
-poweron = "/var/energenie-switch/switch.sh stromleiste1.home 1 1 stay stay stay"
+poweron = "/var/mystrom-switch/switch.sh mystrom1.home on"
 process = subprocess.Popen(poweron.split(), stdout=subprocess.PIPE)
 time.sleep(1)
-mainpowerstatefile = '/var/www/states/state_stromleiste1.home_outlet1.txt'
+mainpowerstatefile = '/var/www/states/light_mystrom1.home.txt'
 mainpowerstate = open(mainpowerstatefile).read().split('\n')
-while mainpowerstate[0] != '1':
+while mainpowerstate[0] != 'on':
 	time.sleep(1)
 	print "Main Power not on, waiting..."
+	powerstate = "/var/mystrom-switch/switch.sh mystrom1.home state"
+	process2 = subprocess.Popen(powerstate.split(), stdout=subprocess.PIPE)
+	mainpowerstate = open(mainpowerstatefile).read().split('\n')
 
 print "Main Power on, good to go"
 
@@ -227,7 +230,7 @@ def fadetoscene( steps, delay ):
 
 #Define Poweroff of Mainswitch
 def mainpoweroff():
-	poweroff = "/var/energenie-switch/switch.sh stromleiste1.home 1 0 stay stay stay"
+	poweroff = "/var/mystrom-switch/switch.sh mystrom1.home off"
 	process = subprocess.Popen(poweroff.split(), stdout=subprocess.PIPE)
 
 
