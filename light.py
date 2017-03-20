@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-from Adafruit_PWM_Servo_Driver import PWM
+#from Adafruit_PWM_Servo_Driver import PWM
+import Adafruit_PCA9685
 from subprocess import check_output
 import os, time, sys, subprocess
 
@@ -27,9 +28,9 @@ while mainpowerstate[0] != 'on':
 
 print "Main Power on, good to go"
 
-pwm = PWM(0x40)
+pwm = Adafruit_PCA9685.PCA9685()
 
-pwm.setPWMFreq(80)
+pwm.set_pwm_freq(80)
 
 #define Channels, 1=red, 2=green, 3=blue, and so on
 ch11 = 1
@@ -81,7 +82,7 @@ def readcurrent():
 def setchannel( channel, valuepercent ):
 	maxpercent = 4095
 	value = valuepercent * maxpercent / 100
-	pwm.setPWM(channel, 0, value)
+	pwm.set_pwm(channel, 0, value)
 	statefile = 'state/' + str(channel) + '.state'
 	filehandle = open(statefile, "w")
 	current_value = str(valuepercent)
